@@ -95,13 +95,13 @@ class bdAPI():
     #показывает комменты базы, совпадающие со словарем
     def showGoodComments(self):
         with self.connection.cursor() as cursor:
-            cursor.execute("SELECT * FROM comments WHERE comment_meet='1';")
+            cursor.execute("SELECT * FROM comments WHERE comment_meet='1' ORDER BY comment_date;")
             rows = cursor.fetchall()
             return rows
     #показывает новые комменты базы, совпадающие со словарем
     def showGoodNewComments(self):
         with self.connection.cursor() as cursor:
-            cursor.execute("SELECT * FROM comments WHERE comment_meet='1' AND comment_new='1';")
+            cursor.execute("SELECT * FROM comments WHERE comment_meet='1' AND comment_new='1' ORDER BY comment_date;;")
             rows = cursor.fetchall()
             return rows 
     #получает ссылку на запись поста по ид комментария
@@ -123,7 +123,7 @@ class bdAPI():
     #возвращает слова по строке поиска 
     def getCommentHandsearch(self,word):
         with self.connection.cursor() as cursor:
-            cursor.execute("SELECT * FROM comments WHERE comment_text LIKE '%"+word+"%';")
+            cursor.execute("SELECT * FROM comments WHERE comment_text LIKE '%"+word+"%' ORDER BY comment_date;")
             comments=cursor.fetchall()
             return comments
     #возвращает словарь
